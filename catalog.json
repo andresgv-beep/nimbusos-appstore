@@ -172,6 +172,7 @@
       "port": 8123,
       "image": "homeassistant/home-assistant:latest",
       "official": true,
+      "external": true,
       "compose": "services:\n  homeassistant:\n    image: homeassistant/home-assistant:latest\n    container_name: homeassistant\n    network_mode: host\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - /etc/localtime:/etc/localtime:ro\n    environment:\n      - TZ=${TZ}\n    restart: unless-stopped"
     },
     "pihole": {
