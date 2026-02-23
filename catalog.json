@@ -1,0 +1,278 @@
+{
+  "version": 1,
+  "updated": "2026-02-23",
+  "categories": {
+    "media": "Multimedia",
+    "cloud": "Cloud & Sync", 
+    "downloads": "Descargas",
+    "homelab": "Home Lab",
+    "development": "Desarrollo",
+    "security": "Seguridad",
+    "monitoring": "Monitorización"
+  },
+  "apps": {
+    "jellyfin": {
+      "name": "Jellyfin",
+      "description": "Servidor multimedia gratuito y open source. Alternativa a Plex.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/jellyfin.svg",
+      "category": "media",
+      "port": 8096,
+      "image": "jellyfin/jellyfin:latest",
+      "official": true,
+      "compose": "services:\n  jellyfin:\n    image: jellyfin/jellyfin:latest\n    container_name: jellyfin\n    ports:\n      - '8096:8096'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${CONFIG_PATH}/cache:/cache\n    environment:\n      - JELLYFIN_PublishedServerUrl=${HOST_IP}\n    restart: unless-stopped"
+    },
+    "plex": {
+      "name": "Plex",
+      "description": "Servidor multimedia con apps para todas las plataformas.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/plex.svg",
+      "category": "media",
+      "port": 32400,
+      "image": "plexinc/pms-docker:latest",
+      "official": true,
+      "compose": "services:\n  plex:\n    image: plexinc/pms-docker:latest\n    container_name: plex\n    ports:\n      - '32400:32400'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${CONFIG_PATH}/transcode:/transcode\n    environment:\n      - PLEX_CLAIM=${PLEX_CLAIM}\n      - TZ=${TZ}\n    restart: unless-stopped"
+    },
+    "emby": {
+      "name": "Emby",
+      "description": "Servidor multimedia personal con transcodificación.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/emby.svg",
+      "category": "media",
+      "port": 8096,
+      "image": "emby/embyserver:latest",
+      "official": true,
+      "compose": "services:\n  emby:\n    image: emby/embyserver:latest\n    container_name: emby\n    ports:\n      - '8920:8096'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n    environment:\n      - TZ=${TZ}\n    restart: unless-stopped"
+    },
+    "navidrome": {
+      "name": "Navidrome",
+      "description": "Servidor de música compatible con Subsonic/Airsonic.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/navidrome.svg",
+      "category": "media",
+      "port": 4533,
+      "image": "deluan/navidrome:latest",
+      "official": true,
+      "compose": "services:\n  navidrome:\n    image: deluan/navidrome:latest\n    container_name: navidrome\n    ports:\n      - '4533:4533'\n    volumes:\n      - ${CONFIG_PATH}/data:/data\n      - ${MUSIC_PATH}:/music:ro\n    environment:\n      - ND_SCANSCHEDULE=1h\n      - ND_LOGLEVEL=info\n    restart: unless-stopped"
+    },
+    "nextcloud": {
+      "name": "Nextcloud",
+      "description": "Tu propia nube privada. Archivos, calendario, contactos.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/nextcloud.svg",
+      "category": "cloud",
+      "port": 8080,
+      "image": "nextcloud:latest",
+      "official": true,
+      "compose": "services:\n  nextcloud:\n    image: nextcloud:latest\n    container_name: nextcloud\n    ports:\n      - '8080:80'\n    volumes:\n      - ${CONFIG_PATH}/html:/var/www/html\n      - ${CONFIG_PATH}/data:/var/www/html/data\n    environment:\n      - TZ=${TZ}\n    restart: unless-stopped"
+    },
+    "syncthing": {
+      "name": "Syncthing",
+      "description": "Sincronización de archivos P2P, sin servidor central.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/syncthing.svg",
+      "category": "cloud",
+      "port": 8384,
+      "image": "syncthing/syncthing:latest",
+      "official": true,
+      "compose": "services:\n  syncthing:\n    image: syncthing/syncthing:latest\n    container_name: syncthing\n    hostname: nimbusos\n    ports:\n      - '8384:8384'\n      - '22000:22000/tcp'\n      - '22000:22000/udp'\n    volumes:\n      - ${CONFIG_PATH}:/var/syncthing\n    environment:\n      - PUID=1000\n      - PGID=1000\n    restart: unless-stopped"
+    },
+    "filebrowser": {
+      "name": "File Browser",
+      "description": "Explorador de archivos web con interfaz moderna.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/filebrowser.svg",
+      "category": "cloud",
+      "port": 8085,
+      "image": "filebrowser/filebrowser:latest",
+      "official": true,
+      "compose": "services:\n  filebrowser:\n    image: filebrowser/filebrowser:latest\n    container_name: filebrowser\n    ports:\n      - '8085:80'\n    volumes:\n      - ${CONFIG_PATH}/database.db:/database.db\n      - ${DATA_PATH}:/srv\n    environment:\n      - PUID=1000\n      - PGID=1000\n    restart: unless-stopped"
+    },
+    "immich": {
+      "name": "Immich",
+      "description": "Gestión de fotos y vídeos con IA. Alternativa a Google Photos.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/immich.svg",
+      "category": "cloud",
+      "port": 2283,
+      "image": "ghcr.io/immich-app/immich-server:release",
+      "official": true,
+      "isStack": true,
+      "compose": "services:\n  immich-server:\n    image: ghcr.io/immich-app/immich-server:release\n    container_name: immich_server\n    ports:\n      - '2283:2283'\n    volumes:\n      - ${CONFIG_PATH}/upload:/usr/src/app/upload\n      - /etc/localtime:/etc/localtime:ro\n    environment:\n      - DB_PASSWORD=${DB_PASSWORD}\n      - DB_USERNAME=postgres\n      - DB_DATABASE_NAME=immich\n      - DB_HOSTNAME=immich_postgres\n      - REDIS_HOSTNAME=immich_redis\n    depends_on:\n      - redis\n      - database\n    restart: unless-stopped\n\n  immich-machine-learning:\n    image: ghcr.io/immich-app/immich-machine-learning:release\n    container_name: immich_ml\n    volumes:\n      - ${CONFIG_PATH}/model-cache:/cache\n    restart: unless-stopped\n\n  redis:\n    image: redis:6.2-alpine\n    container_name: immich_redis\n    restart: unless-stopped\n\n  database:\n    image: tensorchord/pgvecto-rs:pg14-v0.2.0\n    container_name: immich_postgres\n    environment:\n      - POSTGRES_PASSWORD=${DB_PASSWORD}\n      - POSTGRES_USER=postgres\n      - POSTGRES_DB=immich\n    volumes:\n      - ${CONFIG_PATH}/postgres:/var/lib/postgresql/data\n    restart: unless-stopped",
+      "env": {
+        "DB_PASSWORD": "{RANDOM}"
+      }
+    },
+    "transmission": {
+      "name": "Transmission",
+      "description": "Cliente BitTorrent ligero con interfaz web.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/transmission.svg",
+      "category": "downloads",
+      "port": 9091,
+      "image": "linuxserver/transmission:latest",
+      "official": true,
+      "compose": "services:\n  transmission:\n    image: linuxserver/transmission:latest\n    container_name: transmission\n    ports:\n      - '9091:9091'\n      - '51413:51413'\n      - '51413:51413/udp'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${DOWNLOADS_PATH}:/downloads\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=${TZ}\n    restart: unless-stopped"
+    },
+    "qbittorrent": {
+      "name": "qBittorrent",
+      "description": "Cliente BitTorrent potente con muchas opciones.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/qbittorrent.svg",
+      "category": "downloads",
+      "port": 8081,
+      "image": "linuxserver/qbittorrent:latest",
+      "official": true,
+      "compose": "services:\n  qbittorrent:\n    image: linuxserver/qbittorrent:latest\n    container_name: qbittorrent\n    ports:\n      - '8081:8081'\n      - '6881:6881'\n      - '6881:6881/udp'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${DOWNLOADS_PATH}:/downloads\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=${TZ}\n      - WEBUI_PORT=8081\n    restart: unless-stopped"
+    },
+    "sonarr": {
+      "name": "Sonarr",
+      "description": "Gestión automática de series de TV.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/sonarr.svg",
+      "category": "downloads",
+      "port": 8989,
+      "image": "linuxserver/sonarr:latest",
+      "official": true,
+      "compose": "services:\n  sonarr:\n    image: linuxserver/sonarr:latest\n    container_name: sonarr\n    ports:\n      - '8989:8989'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${MEDIA_PATH}/tv:/tv\n      - ${DOWNLOADS_PATH}:/downloads\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=${TZ}\n    restart: unless-stopped"
+    },
+    "radarr": {
+      "name": "Radarr",
+      "description": "Gestión automática de películas.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/radarr.svg",
+      "category": "downloads",
+      "port": 7878,
+      "image": "linuxserver/radarr:latest",
+      "official": true,
+      "compose": "services:\n  radarr:\n    image: linuxserver/radarr:latest\n    container_name: radarr\n    ports:\n      - '7878:7878'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${MEDIA_PATH}/movies:/movies\n      - ${DOWNLOADS_PATH}:/downloads\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=${TZ}\n    restart: unless-stopped"
+    },
+    "prowlarr": {
+      "name": "Prowlarr",
+      "description": "Gestor de indexadores para Sonarr/Radarr.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/prowlarr.svg",
+      "category": "downloads",
+      "port": 9696,
+      "image": "linuxserver/prowlarr:latest",
+      "official": true,
+      "compose": "services:\n  prowlarr:\n    image: linuxserver/prowlarr:latest\n    container_name: prowlarr\n    ports:\n      - '9696:9696'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=${TZ}\n    restart: unless-stopped"
+    },
+    "homeassistant": {
+      "name": "Home Assistant",
+      "description": "Automatización del hogar. Controla todos tus dispositivos IoT.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/homeassistant.svg",
+      "category": "homelab",
+      "port": 8123,
+      "image": "homeassistant/home-assistant:latest",
+      "official": true,
+      "compose": "services:\n  homeassistant:\n    image: homeassistant/home-assistant:latest\n    container_name: homeassistant\n    network_mode: host\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - /etc/localtime:/etc/localtime:ro\n    environment:\n      - TZ=${TZ}\n    restart: unless-stopped"
+    },
+    "pihole": {
+      "name": "Pi-hole",
+      "description": "Bloqueo de publicidad a nivel de red DNS.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/pihole.svg",
+      "category": "homelab",
+      "port": 8088,
+      "image": "pihole/pihole:latest",
+      "official": true,
+      "compose": "services:\n  pihole:\n    image: pihole/pihole:latest\n    container_name: pihole\n    ports:\n      - '53:53/tcp'\n      - '53:53/udp'\n      - '8088:80'\n    volumes:\n      - ${CONFIG_PATH}/etc-pihole:/etc/pihole\n      - ${CONFIG_PATH}/etc-dnsmasq.d:/etc/dnsmasq.d\n    environment:\n      - TZ=${TZ}\n      - WEBPASSWORD=${WEBPASSWORD}\n    restart: unless-stopped",
+      "env": {
+        "WEBPASSWORD": "admin"
+      }
+    },
+    "adguard": {
+      "name": "AdGuard Home",
+      "description": "Bloqueo de publicidad y tracking DNS.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/adguard.svg",
+      "category": "homelab",
+      "port": 3000,
+      "image": "adguard/adguardhome:latest",
+      "official": true,
+      "compose": "services:\n  adguard:\n    image: adguard/adguardhome:latest\n    container_name: adguard\n    ports:\n      - '53:53/tcp'\n      - '53:53/udp'\n      - '3000:3000'\n      - '8083:80'\n    volumes:\n      - ${CONFIG_PATH}/work:/opt/adguardhome/work\n      - ${CONFIG_PATH}/conf:/opt/adguardhome/conf\n    restart: unless-stopped"
+    },
+    "nginx-proxy": {
+      "name": "Nginx Proxy Manager",
+      "description": "Proxy reverso con SSL automático.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/nginx.svg",
+      "category": "homelab",
+      "port": 81,
+      "image": "jc21/nginx-proxy-manager:latest",
+      "official": true,
+      "compose": "services:\n  nginx-proxy:\n    image: jc21/nginx-proxy-manager:latest\n    container_name: nginx-proxy\n    ports:\n      - '80:80'\n      - '81:81'\n      - '443:443'\n    volumes:\n      - ${CONFIG_PATH}/data:/data\n      - ${CONFIG_PATH}/letsencrypt:/etc/letsencrypt\n    restart: unless-stopped"
+    },
+    "gitea": {
+      "name": "Gitea",
+      "description": "Servidor Git auto-hospedado, ligero y rápido.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/gitea.svg",
+      "category": "development",
+      "port": 3000,
+      "image": "gitea/gitea:latest",
+      "official": true,
+      "compose": "services:\n  gitea:\n    image: gitea/gitea:latest\n    container_name: gitea\n    ports:\n      - '3000:3000'\n      - '2222:22'\n    volumes:\n      - ${CONFIG_PATH}/data:/data\n      - /etc/timezone:/etc/timezone:ro\n      - /etc/localtime:/etc/localtime:ro\n    environment:\n      - USER_UID=1000\n      - USER_GID=1000\n    restart: unless-stopped"
+    },
+    "codeserver": {
+      "name": "VS Code Server",
+      "description": "Visual Studio Code en el navegador.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/vscode.svg",
+      "category": "development",
+      "port": 8443,
+      "image": "linuxserver/code-server:latest",
+      "official": true,
+      "compose": "services:\n  codeserver:\n    image: linuxserver/code-server:latest\n    container_name: codeserver\n    ports:\n      - '8443:8443'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${PROJECTS_PATH}:/projects\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=${TZ}\n      - PASSWORD=${PASSWORD}\n    restart: unless-stopped",
+      "env": {
+        "PASSWORD": "{RANDOM}"
+      }
+    },
+    "portainer": {
+      "name": "Portainer",
+      "description": "Gestión visual de Docker y contenedores.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/portainer.svg",
+      "category": "development",
+      "port": 9000,
+      "image": "portainer/portainer-ce:latest",
+      "official": true,
+      "compose": "services:\n  portainer:\n    image: portainer/portainer-ce:latest\n    container_name: portainer\n    ports:\n      - '9000:9000'\n    volumes:\n      - /var/run/docker.sock:/var/run/docker.sock\n      - ${CONFIG_PATH}/data:/data\n    restart: unless-stopped"
+    },
+    "vaultwarden": {
+      "name": "Vaultwarden",
+      "description": "Gestor de contraseñas compatible con Bitwarden.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/vaultwarden.svg",
+      "category": "security",
+      "port": 8082,
+      "image": "vaultwarden/server:latest",
+      "official": true,
+      "compose": "services:\n  vaultwarden:\n    image: vaultwarden/server:latest\n    container_name: vaultwarden\n    ports:\n      - '8082:80'\n    volumes:\n      - ${CONFIG_PATH}/data:/data\n    environment:\n      - WEBSOCKET_ENABLED=true\n    restart: unless-stopped"
+    },
+    "authelia": {
+      "name": "Authelia",
+      "description": "Autenticación y autorización SSO.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/authelia.svg",
+      "category": "security",
+      "port": 9092,
+      "image": "authelia/authelia:latest",
+      "official": true,
+      "compose": "services:\n  authelia:\n    image: authelia/authelia:latest\n    container_name: authelia\n    ports:\n      - '9092:9091'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n    environment:\n      - TZ=${TZ}\n    restart: unless-stopped"
+    },
+    "grafana": {
+      "name": "Grafana",
+      "description": "Dashboards y visualización de métricas.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/grafana.svg",
+      "category": "monitoring",
+      "port": 3001,
+      "image": "grafana/grafana:latest",
+      "official": true,
+      "compose": "services:\n  grafana:\n    image: grafana/grafana:latest\n    container_name: grafana\n    ports:\n      - '3001:3000'\n    volumes:\n      - ${CONFIG_PATH}/data:/var/lib/grafana\n    environment:\n      - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD}\n    restart: unless-stopped",
+      "env": {
+        "ADMIN_PASSWORD": "admin"
+      }
+    },
+    "prometheus": {
+      "name": "Prometheus",
+      "description": "Sistema de monitorización y alertas.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/prometheus.svg",
+      "category": "monitoring",
+      "port": 9090,
+      "image": "prom/prometheus:latest",
+      "official": true,
+      "compose": "services:\n  prometheus:\n    image: prom/prometheus:latest\n    container_name: prometheus\n    ports:\n      - '9090:9090'\n    volumes:\n      - ${CONFIG_PATH}/config:/etc/prometheus\n      - ${CONFIG_PATH}/data:/prometheus\n    restart: unless-stopped"
+    },
+    "uptime-kuma": {
+      "name": "Uptime Kuma",
+      "description": "Monitor de uptime con interfaz moderna.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/uptimekuma.svg",
+      "category": "monitoring",
+      "port": 3002,
+      "image": "louislam/uptime-kuma:latest",
+      "official": true,
+      "compose": "services:\n  uptime-kuma:\n    image: louislam/uptime-kuma:latest\n    container_name: uptime-kuma\n    ports:\n      - '3002:3001'\n    volumes:\n      - ${CONFIG_PATH}/data:/app/data\n    restart: unless-stopped"
+    }
+  }
+}
