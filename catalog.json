@@ -167,7 +167,7 @@
     "homeassistant": {
       "name": "Home Assistant",
       "description": "Automatización del hogar. Controla todos tus dispositivos IoT.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/homeassistant.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/home-assistant.svg",
       "category": "homelab",
       "port": 8123,
       "image": "homeassistant/home-assistant:latest",
@@ -177,7 +177,7 @@
     "pihole": {
       "name": "Pi-hole",
       "description": "Bloqueo de publicidad a nivel de red DNS.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/pihole.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/pi-hole.svg",
       "category": "homelab",
       "port": 8088,
       "image": "pihole/pihole:latest",
