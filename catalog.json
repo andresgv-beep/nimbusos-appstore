@@ -108,7 +108,10 @@
       "port": 9091,
       "image": "linuxserver/transmission:latest",
       "official": true,
-      "compose": "services:\n  transmission:\n    image: linuxserver/transmission:latest\n    container_name: transmission\n    ports:\n      - '9091:9091'\n      - '51413:51413'\n      - '51413:51413/udp'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${DOWNLOADS_PATH}:/downloads\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=${TZ}\n    restart: unless-stopped"
+      "compose": "services:\n  transmission:\n    image: linuxserver/transmission:latest\n    container_name: transmission\n    ports:\n      - '9091:9091'\n      - '51413:51413'\n      - '51413:51413/udp'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${DOWNLOADS_PATH}:/downloads\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=${TZ}\n    restart: unless-stopped",
+      "env": {
+        "DOWNLOADS_PATH": "${CONFIG_PATH}/downloads"
+      }
     },
     "qbittorrent": {
       "name": "qBittorrent",
@@ -118,7 +121,10 @@
       "port": 8081,
       "image": "linuxserver/qbittorrent:latest",
       "official": true,
-      "compose": "services:\n  qbittorrent:\n    image: linuxserver/qbittorrent:latest\n    container_name: qbittorrent\n    ports:\n      - '8081:8081'\n      - '6881:6881'\n      - '6881:6881/udp'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${DOWNLOADS_PATH}:/downloads\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=${TZ}\n      - WEBUI_PORT=8081\n    restart: unless-stopped"
+      "compose": "services:\n  qbittorrent:\n    image: linuxserver/qbittorrent:latest\n    container_name: qbittorrent\n    ports:\n      - '8081:8081'\n      - '6881:6881'\n      - '6881:6881/udp'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${DOWNLOADS_PATH}:/downloads\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=${TZ}\n      - WEBUI_PORT=8081\n    restart: unless-stopped",
+      "env": {
+        "DOWNLOADS_PATH": "${CONFIG_PATH}/downloads"
+      }
     },
     "sonarr": {
       "name": "Sonarr",
@@ -128,7 +134,11 @@
       "port": 8989,
       "image": "linuxserver/sonarr:latest",
       "official": true,
-      "compose": "services:\n  sonarr:\n    image: linuxserver/sonarr:latest\n    container_name: sonarr\n    ports:\n      - '8989:8989'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${MEDIA_PATH}/tv:/tv\n      - ${DOWNLOADS_PATH}:/downloads\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=${TZ}\n    restart: unless-stopped"
+      "compose": "services:\n  sonarr:\n    image: linuxserver/sonarr:latest\n    container_name: sonarr\n    ports:\n      - '8989:8989'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${MEDIA_PATH}/tv:/tv\n      - ${DOWNLOADS_PATH}:/downloads\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=${TZ}\n    restart: unless-stopped",
+      "env": {
+        "DOWNLOADS_PATH": "${CONFIG_PATH}/downloads",
+        "MEDIA_PATH": "${CONFIG_PATH}/media"
+      }
     },
     "radarr": {
       "name": "Radarr",
@@ -138,7 +148,11 @@
       "port": 7878,
       "image": "linuxserver/radarr:latest",
       "official": true,
-      "compose": "services:\n  radarr:\n    image: linuxserver/radarr:latest\n    container_name: radarr\n    ports:\n      - '7878:7878'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${MEDIA_PATH}/movies:/movies\n      - ${DOWNLOADS_PATH}:/downloads\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=${TZ}\n    restart: unless-stopped"
+      "compose": "services:\n  radarr:\n    image: linuxserver/radarr:latest\n    container_name: radarr\n    ports:\n      - '7878:7878'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${MEDIA_PATH}/movies:/movies\n      - ${DOWNLOADS_PATH}:/downloads\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=${TZ}\n    restart: unless-stopped",
+      "env": {
+        "DOWNLOADS_PATH": "${CONFIG_PATH}/downloads",
+        "MEDIA_PATH": "${CONFIG_PATH}/media"
+      }
     },
     "prowlarr": {
       "name": "Prowlarr",
