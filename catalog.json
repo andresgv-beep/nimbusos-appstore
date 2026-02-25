@@ -111,17 +111,11 @@
       "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/transmission.svg",
       "category": "downloads",
       "port": 9091,
-      "image": "linuxserver/transmission:latest",
+      "image": "linuxserver/transmission:4.0.5-r2-ls254",
       "official": true,
-      "compose": "services:\n  transmission:\n    image: linuxserver/transmission:latest\n    container_name: transmission\n    ports:\n      - '9091:9091'\n      - '51413:51413'\n      - '51413:51413/udp'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${DOWNLOADS_PATH}:/downloads\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=${TZ}\n      - USER=${TRANSMISSION_USER}\n      - PASS=${TRANSMISSION_PASS}\n    restart: unless-stopped",
+      "compose": "services:\n  transmission:\n    image: linuxserver/transmission:4.0.5-r2-ls254\n    container_name: transmission\n    ports:\n      - '9091:9091'\n      - '51413:51413'\n      - '51413:51413/udp'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${DOWNLOADS_PATH}:/downloads\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=${TZ}\n    restart: unless-stopped",
       "env": {
-        "DOWNLOADS_PATH": "${CONFIG_PATH}/downloads",
-        "TRANSMISSION_USER": "admin",
-        "TRANSMISSION_PASS": "nimbus"
-      },
-      "credentials": {
-        "usernameKey": "TRANSMISSION_USER",
-        "passwordKey": "TRANSMISSION_PASS"
+        "DOWNLOADS_PATH": "${CONFIG_PATH}/downloads"
       }
     },
     "qbittorrent": {
