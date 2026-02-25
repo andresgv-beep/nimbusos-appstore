@@ -79,7 +79,11 @@
       "port": 8085,
       "image": "filebrowser/filebrowser:latest",
       "official": true,
-      "compose": "services:\n  filebrowser:\n    image: filebrowser/filebrowser:latest\n    container_name: filebrowser\n    ports:\n      - '8085:80'\n    volumes:\n      - ${CONFIG_PATH}/database.db:/database.db\n      - ${DATA_PATH}:/srv\n    environment:\n      - PUID=1000\n      - PGID=1000\n    restart: unless-stopped"
+      "compose": "services:\n  filebrowser:\n    image: filebrowser/filebrowser:latest\n    container_name: filebrowser\n    ports:\n      - '8085:80'\n    volumes:\n      - ${CONFIG_PATH}/database.db:/database.db\n      - ${DATA_PATH}:/srv\n    environment:\n      - PUID=1000\n      - PGID=1000\n    restart: unless-stopped",
+      "credentials": {
+        "username": "admin",
+        "password": "admin"
+      }
     },
     "immich": {
       "name": "Immich",
@@ -187,6 +191,9 @@
       "compose": "services:\n  pihole:\n    image: pihole/pihole:latest\n    container_name: pihole\n    ports:\n      - '53:53/tcp'\n      - '53:53/udp'\n      - '8088:80'\n    volumes:\n      - ${CONFIG_PATH}/etc-pihole:/etc/pihole\n      - ${CONFIG_PATH}/etc-dnsmasq.d:/etc/dnsmasq.d\n    environment:\n      - TZ=${TZ}\n      - WEBPASSWORD=${WEBPASSWORD}\n    restart: unless-stopped",
       "env": {
         "WEBPASSWORD": "admin"
+      },
+      "credentials": {
+        "passwordKey": "WEBPASSWORD"
       }
     },
     "adguard": {
@@ -207,7 +214,11 @@
       "port": 81,
       "image": "jc21/nginx-proxy-manager:latest",
       "official": true,
-      "compose": "services:\n  nginx-proxy:\n    image: jc21/nginx-proxy-manager:latest\n    container_name: nginx-proxy\n    ports:\n      - '80:80'\n      - '81:81'\n      - '443:443'\n    volumes:\n      - ${CONFIG_PATH}/data:/data\n      - ${CONFIG_PATH}/letsencrypt:/etc/letsencrypt\n    restart: unless-stopped"
+      "compose": "services:\n  nginx-proxy:\n    image: jc21/nginx-proxy-manager:latest\n    container_name: nginx-proxy\n    ports:\n      - '80:80'\n      - '81:81'\n      - '443:443'\n    volumes:\n      - ${CONFIG_PATH}/data:/data\n      - ${CONFIG_PATH}/letsencrypt:/etc/letsencrypt\n    restart: unless-stopped",
+      "credentials": {
+        "username": "admin@example.com",
+        "password": "changeme"
+      }
     },
     "gitea": {
       "name": "Gitea",
@@ -231,6 +242,9 @@
       "env": {
         "PASSWORD": "nimbus",
         "PROJECTS_PATH": "${CONFIG_PATH}/projects"
+      },
+      "credentials": {
+        "passwordKey": "PASSWORD"
       }
     },
     "portainer": {
@@ -274,6 +288,10 @@
       "compose": "services:\n  grafana:\n    image: grafana/grafana:latest\n    container_name: grafana\n    ports:\n      - '3001:3000'\n    volumes:\n      - ${CONFIG_PATH}/data:/var/lib/grafana\n    environment:\n      - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD}\n    restart: unless-stopped",
       "env": {
         "ADMIN_PASSWORD": "admin"
+      },
+      "credentials": {
+        "username": "admin",
+        "passwordKey": "ADMIN_PASSWORD"
       }
     },
     "prometheus": {
