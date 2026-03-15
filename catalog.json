@@ -14,7 +14,7 @@
     "jellyfin": {
       "name": "Jellyfin",
       "description": "Servidor multimedia gratuito y open source. Alternativa a Plex.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/jellyfin.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/jellyfin.svg",
       "category": "media",
       "port": 8096,
       "image": "jellyfin/jellyfin:latest",
@@ -24,7 +24,7 @@
     "plex": {
       "name": "Plex",
       "description": "Servidor multimedia con apps para todas las plataformas.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/plex.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/plex.svg",
       "category": "media",
       "port": 32400,
       "image": "plexinc/pms-docker:latest",
@@ -34,7 +34,7 @@
     "emby": {
       "name": "Emby",
       "description": "Servidor multimedia personal con transcodificación.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/emby.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/emby.svg",
       "category": "media",
       "port": 8096,
       "image": "emby/embyserver:latest",
@@ -44,7 +44,7 @@
     "navidrome": {
       "name": "Navidrome",
       "description": "Servidor de música compatible con Subsonic/Airsonic.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/navidrome.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/navidrome.svg",
       "category": "media",
       "port": 4533,
       "image": "deluan/navidrome:latest",
@@ -55,7 +55,7 @@
     "nextcloud": {
       "name": "Nextcloud",
       "description": "Tu propia nube privada. Archivos, calendario, contactos.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/nextcloud.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/nextcloud.svg",
       "category": "cloud",
       "port": 8080,
       "image": "nextcloud:latest",
@@ -65,7 +65,7 @@
     "syncthing": {
       "name": "Syncthing",
       "description": "Sincronización de archivos P2P, sin servidor central.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/syncthing.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/syncthing.svg",
       "category": "cloud",
       "port": 8384,
       "image": "syncthing/syncthing:latest",
@@ -75,7 +75,7 @@
     "filebrowser": {
       "name": "File Browser",
       "description": "Explorador de archivos web con interfaz moderna.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/filebrowser.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/filebrowser.svg",
       "category": "cloud",
       "port": 8085,
       "image": "filebrowser/filebrowser:latest",
@@ -89,7 +89,7 @@
     "immich": {
       "name": "Immich",
       "description": "Gestión de fotos y vídeos con IA. Alternativa a Google Photos.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/immich.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/immich.svg",
       "category": "cloud",
       "port": 2283,
       "image": "ghcr.io/immich-app/immich-server:release",
@@ -109,7 +109,7 @@
     "download-station": {
       "name": "Download Station",
       "description": "Native download manager with BitTorrent support. Downloads directly to your NimbusOS storage pools.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/transmission.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/transmission.svg",
       "category": "downloads",
       "native": true,
       "nativeId": "transmission",
@@ -119,7 +119,7 @@
     "transmission": {
       "name": "Transmission",
       "description": "Cliente BitTorrent ligero con interfaz web.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/transmission.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/transmission.svg",
       "category": "downloads",
       "port": 9091,
       "image": "linuxserver/transmission:latest",
@@ -132,7 +132,7 @@
     "qbittorrent": {
       "name": "qBittorrent",
       "description": "Cliente BitTorrent potente con muchas opciones.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/qbittorrent.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/qbittorrent.svg",
       "category": "downloads",
       "port": 8081,
       "image": "linuxserver/qbittorrent:latest",
@@ -145,7 +145,7 @@
     "sonarr": {
       "name": "Sonarr",
       "description": "Gestión automática de series de TV.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/sonarr.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/sonarr.svg",
       "category": "downloads",
       "port": 8989,
       "image": "linuxserver/sonarr:latest",
@@ -159,7 +159,7 @@
     "radarr": {
       "name": "Radarr",
       "description": "Gestión automática de películas.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/radarr.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/radarr.svg",
       "category": "downloads",
       "port": 7878,
       "image": "linuxserver/radarr:latest",
@@ -173,7 +173,7 @@
     "prowlarr": {
       "name": "Prowlarr",
       "description": "Gestor de indexadores para Sonarr/Radarr.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/prowlarr.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/prowlarr.svg",
       "category": "downloads",
       "port": 9696,
       "image": "linuxserver/prowlarr:latest",
@@ -183,7 +183,7 @@
     "homeassistant": {
       "name": "Home Assistant",
       "description": "Automatización del hogar. Controla todos tus dispositivos IoT.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/home-assistant.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/home-assistant.svg",
       "category": "homelab",
       "port": 8123,
       "image": "homeassistant/home-assistant:latest",
@@ -194,7 +194,7 @@
     "pihole": {
       "name": "Pi-hole",
       "description": "Bloqueo de publicidad a nivel de red DNS.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/pi-hole.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/pi-hole.svg",
       "category": "homelab",
       "port": 8088,
       "image": "pihole/pihole:latest",
@@ -210,7 +210,7 @@
     "adguard": {
       "name": "AdGuard Home",
       "description": "Bloqueo de publicidad y tracking DNS.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/adguard.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/adguard.svg",
       "category": "homelab",
       "port": 3000,
       "image": "adguard/adguardhome:latest",
@@ -220,7 +220,7 @@
     "nginx-proxy": {
       "name": "Nginx Proxy Manager",
       "description": "Proxy reverso con SSL automático.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/nginx.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/nginx.svg",
       "category": "homelab",
       "port": 81,
       "image": "jc21/nginx-proxy-manager:latest",
@@ -234,7 +234,7 @@
     "gitea": {
       "name": "Gitea",
       "description": "Servidor Git auto-hospedado, ligero y rápido.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/gitea.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/gitea.svg",
       "category": "development",
       "port": 3000,
       "image": "gitea/gitea:latest",
@@ -244,7 +244,7 @@
     "codeserver": {
       "name": "VS Code Server",
       "description": "Visual Studio Code en el navegador. Contraseña por defecto: nimbus",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/vscode.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/vscode.svg",
       "category": "development",
       "port": 8443,
       "image": "linuxserver/code-server:latest",
@@ -261,7 +261,7 @@
     "portainer": {
       "name": "Portainer",
       "description": "Gestión visual de Docker y contenedores.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/portainer.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/portainer.svg",
       "category": "development",
       "port": 9000,
       "image": "portainer/portainer-ce:latest",
@@ -271,7 +271,7 @@
     "vaultwarden": {
       "name": "Vaultwarden",
       "description": "Gestor de contraseñas compatible con Bitwarden.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/vaultwarden.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/vaultwarden.svg",
       "category": "security",
       "port": 8082,
       "image": "vaultwarden/server:latest",
@@ -281,7 +281,7 @@
     "authelia": {
       "name": "Authelia",
       "description": "Autenticación y autorización SSO.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/authelia.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/authelia.svg",
       "category": "security",
       "port": 9092,
       "image": "authelia/authelia:latest",
@@ -291,7 +291,7 @@
     "grafana": {
       "name": "Grafana",
       "description": "Dashboards y visualización de métricas.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/grafana.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/grafana.svg",
       "category": "monitoring",
       "port": 3001,
       "image": "grafana/grafana:latest",
@@ -308,7 +308,7 @@
     "prometheus": {
       "name": "Prometheus",
       "description": "Sistema de monitorización y alertas.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/prometheus.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/prometheus.svg",
       "category": "monitoring",
       "port": 9090,
       "image": "prom/prometheus:latest",
@@ -318,7 +318,7 @@
     "uptime-kuma": {
       "name": "Uptime Kuma",
       "description": "Monitor de uptime con interfaz moderna.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/nimbusos-appstore/main/icons/uptimekuma.svg",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/uptimekuma.svg",
       "category": "monitoring",
       "port": 3002,
       "image": "louislam/uptime-kuma:latest",
