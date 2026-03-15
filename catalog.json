@@ -106,16 +106,6 @@
         "DB_DATA_LOCATION": "${CONFIG_PATH}/postgres"
       }
     },
-    "download-station": {
-      "name": "Download Station",
-      "description": "Native download manager with BitTorrent support. Downloads directly to your NimbusOS storage pools.",
-      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/transmission.svg",
-      "category": "downloads",
-      "native": true,
-      "nativeId": "transmission",
-      "nimbusApp": "downloads",
-      "official": true
-    },
     "transmission": {
       "name": "Transmission",
       "description": "Cliente BitTorrent ligero con interfaz web.",
