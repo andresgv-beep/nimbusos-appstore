@@ -1,7 +1,8 @@
 {
-  "version": 1,
-  "updated": "2026-03-04",
+  "version": 2,
+  "updated": "2026-04-06",
   "categories": {
+    "system": "Sistema",
     "media": "Multimedia",
     "cloud": "Cloud & Sync",
     "downloads": "Descargas",
@@ -11,6 +12,16 @@
     "monitoring": "Monitorización"
   },
   "apps": {
+    "docker-engine": {
+      "name": "Docker Engine",
+      "description": "Motor de contenedores necesario para instalar apps. Se instalará en el pool que elijas.",
+      "icon": "https://raw.githubusercontent.com/andresgv-beep/NimOs-appstore/main/icons/docker.svg",
+      "category": "system",
+      "isSystem": true,
+      "requiresPool": true,
+      "compose": null,
+      "port": null
+    },
     "jellyfin": {
       "name": "Jellyfin",
       "description": "Servidor multimedia gratuito y open source. Alternativa a Plex.",
@@ -19,7 +30,8 @@
       "port": 8096,
       "image": "jellyfin/jellyfin:latest",
       "official": true,
-      "compose": "services:\n  jellyfin:\n    image: jellyfin/jellyfin:latest\n    container_name: jellyfin\n    ports:\n      - '8096:8096'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${CONFIG_PATH}/cache:/cache\n    environment:\n      - JELLYFIN_PublishedServerUrl=${HOST_IP}\n    restart: unless-stopped"
+      "compose": "services:\n  jellyfin:\n    image: jellyfin/jellyfin:latest\n    container_name: jellyfin\n    ports:\n      - '8096:8096'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${CONFIG_PATH}/cache:/cache\n    environment:\n      - JELLYFIN_PublishedServerUrl=${HOST_IP}\n    restart: unless-stopped",
+      "openMode": "internal"
     },
     "plex": {
       "name": "Plex",
@@ -29,7 +41,8 @@
       "port": 32400,
       "image": "plexinc/pms-docker:latest",
       "official": true,
-      "compose": "services:\n  plex:\n    image: plexinc/pms-docker:latest\n    container_name: plex\n    ports:\n      - '32400:32400'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${CONFIG_PATH}/transcode:/transcode\n    environment:\n      - PLEX_CLAIM=${PLEX_CLAIM}\n      - TZ=${TZ}\n    restart: unless-stopped"
+      "compose": "services:\n  plex:\n    image: plexinc/pms-docker:latest\n    container_name: plex\n    ports:\n      - '32400:32400'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${CONFIG_PATH}/transcode:/transcode\n    environment:\n      - PLEX_CLAIM=${PLEX_CLAIM}\n      - TZ=${TZ}\n    restart: unless-stopped",
+      "openMode": "internal"
     },
     "emby": {
       "name": "Emby",
@@ -39,7 +52,8 @@
       "port": 8096,
       "image": "emby/embyserver:latest",
       "official": true,
-      "compose": "services:\n  emby:\n    image: emby/embyserver:latest\n    container_name: emby\n    ports:\n      - '8920:8096'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n    environment:\n      - TZ=${TZ}\n    restart: unless-stopped"
+      "compose": "services:\n  emby:\n    image: emby/embyserver:latest\n    container_name: emby\n    ports:\n      - '8920:8096'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n    environment:\n      - TZ=${TZ}\n    restart: unless-stopped",
+      "openMode": "internal"
     },
     "navidrome": {
       "name": "Navidrome",
@@ -50,7 +64,8 @@
       "image": "deluan/navidrome:latest",
       "official": true,
       "compose": "services:\n  navidrome:\n    image: deluan/navidrome:latest\n    container_name: navidrome\n    ports:\n      - '4533:4533'\n    volumes:\n      - ${CONFIG_PATH}/data:/data\n      - ${MUSIC_PATH}:/music:ro\n    environment:\n      - ND_SCANSCHEDULE=1h\n      - ND_LOGLEVEL=info\n    restart: unless-stopped",
-      "external": true
+      "external": true,
+      "openMode": "external"
     },
     "nextcloud": {
       "name": "Nextcloud",
@@ -60,7 +75,8 @@
       "port": 8080,
       "image": "nextcloud:latest",
       "official": true,
-      "compose": "services:\n  nextcloud:\n    image: nextcloud:latest\n    container_name: nextcloud\n    ports:\n      - '8080:80'\n    volumes:\n      - ${CONFIG_PATH}/html:/var/www/html\n      - ${CONFIG_PATH}/data:/var/www/html/data\n    environment:\n      - TZ=${TZ}\n    restart: unless-stopped"
+      "compose": "services:\n  nextcloud:\n    image: nextcloud:latest\n    container_name: nextcloud\n    ports:\n      - '8080:80'\n    volumes:\n      - ${CONFIG_PATH}/html:/var/www/html\n      - ${CONFIG_PATH}/data:/var/www/html/data\n    environment:\n      - TZ=${TZ}\n    restart: unless-stopped",
+      "openMode": "internal"
     },
     "syncthing": {
       "name": "Syncthing",
@@ -70,7 +86,8 @@
       "port": 8384,
       "image": "syncthing/syncthing:latest",
       "official": true,
-      "compose": "services:\n  syncthing:\n    image: syncthing/syncthing:latest\n    container_name: syncthing\n    hostname: nimbusos\n    ports:\n      - '8384:8384'\n      - '22000:22000/tcp'\n      - '22000:22000/udp'\n    volumes:\n      - ${CONFIG_PATH}:/var/syncthing\n    environment:\n      - PUID=1000\n      - PGID=1000\n    restart: unless-stopped"
+      "compose": "services:\n  syncthing:\n    image: syncthing/syncthing:latest\n    container_name: syncthing\n    hostname: nimbusos\n    ports:\n      - '8384:8384'\n      - '22000:22000/tcp'\n      - '22000:22000/udp'\n    volumes:\n      - ${CONFIG_PATH}:/var/syncthing\n    environment:\n      - PUID=1000\n      - PGID=1000\n    restart: unless-stopped",
+      "openMode": "internal"
     },
     "filebrowser": {
       "name": "File Browser",
@@ -84,7 +101,8 @@
       "credentials": {
         "username": "admin",
         "password": "admin"
-      }
+      },
+      "openMode": "internal"
     },
     "immich": {
       "name": "Immich",
@@ -105,7 +123,8 @@
         "UPLOAD_LOCATION": "${CONFIG_PATH}/upload",
         "DB_DATA_LOCATION": "${CONFIG_PATH}/postgres"
       },
-      "external": true
+      "external": true,
+      "openMode": "external"
     },
     "transmission": {
       "name": "Transmission",
@@ -118,7 +137,8 @@
       "compose": "services:\n  transmission:\n    image: linuxserver/transmission:latest\n    container_name: transmission\n    ports:\n      - '9091:9091'\n      - '51413:51413'\n      - '51413:51413/udp'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${DOWNLOADS_PATH}:/downloads\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=${TZ}\n    restart: unless-stopped",
       "env": {
         "DOWNLOADS_PATH": "${CONFIG_PATH}/downloads"
-      }
+      },
+      "openMode": "internal"
     },
     "qbittorrent": {
       "name": "qBittorrent",
@@ -131,7 +151,8 @@
       "compose": "services:\n  qbittorrent:\n    image: linuxserver/qbittorrent:latest\n    container_name: qbittorrent\n    ports:\n      - '8081:8081'\n      - '6881:6881'\n      - '6881:6881/udp'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - ${DOWNLOADS_PATH}:/downloads\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=${TZ}\n      - WEBUI_PORT=8081\n    restart: unless-stopped",
       "env": {
         "DOWNLOADS_PATH": "${CONFIG_PATH}/downloads"
-      }
+      },
+      "openMode": "internal"
     },
     "sonarr": {
       "name": "Sonarr",
@@ -145,7 +166,8 @@
       "env": {
         "DOWNLOADS_PATH": "${CONFIG_PATH}/downloads",
         "MEDIA_PATH": "${CONFIG_PATH}/media"
-      }
+      },
+      "openMode": "internal"
     },
     "radarr": {
       "name": "Radarr",
@@ -159,7 +181,8 @@
       "env": {
         "DOWNLOADS_PATH": "${CONFIG_PATH}/downloads",
         "MEDIA_PATH": "${CONFIG_PATH}/media"
-      }
+      },
+      "openMode": "internal"
     },
     "prowlarr": {
       "name": "Prowlarr",
@@ -169,7 +192,8 @@
       "port": 9696,
       "image": "linuxserver/prowlarr:latest",
       "official": true,
-      "compose": "services:\n  prowlarr:\n    image: linuxserver/prowlarr:latest\n    container_name: prowlarr\n    ports:\n      - '9696:9696'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=${TZ}\n    restart: unless-stopped"
+      "compose": "services:\n  prowlarr:\n    image: linuxserver/prowlarr:latest\n    container_name: prowlarr\n    ports:\n      - '9696:9696'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=${TZ}\n    restart: unless-stopped",
+      "openMode": "internal"
     },
     "homeassistant": {
       "name": "Home Assistant",
@@ -180,7 +204,8 @@
       "image": "homeassistant/home-assistant:latest",
       "official": true,
       "external": true,
-      "compose": "services:\n  homeassistant:\n    image: homeassistant/home-assistant:latest\n    container_name: homeassistant\n    network_mode: host\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - /etc/localtime:/etc/localtime:ro\n    environment:\n      - TZ=${TZ}\n    restart: unless-stopped"
+      "compose": "services:\n  homeassistant:\n    image: homeassistant/home-assistant:latest\n    container_name: homeassistant\n    network_mode: host\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n      - /etc/localtime:/etc/localtime:ro\n    environment:\n      - TZ=${TZ}\n    restart: unless-stopped",
+      "openMode": "external"
     },
     "pihole": {
       "name": "Pi-hole",
@@ -196,7 +221,8 @@
       },
       "credentials": {
         "passwordKey": "WEBPASSWORD"
-      }
+      },
+      "openMode": "internal"
     },
     "adguard": {
       "name": "AdGuard Home",
@@ -206,7 +232,8 @@
       "port": 3000,
       "image": "adguard/adguardhome:latest",
       "official": true,
-      "compose": "services:\n  adguard:\n    image: adguard/adguardhome:latest\n    container_name: adguard\n    ports:\n      - '53:53/tcp'\n      - '53:53/udp'\n      - '3000:3000'\n      - '8083:80'\n    volumes:\n      - ${CONFIG_PATH}/work:/opt/adguardhome/work\n      - ${CONFIG_PATH}/conf:/opt/adguardhome/conf\n    restart: unless-stopped"
+      "compose": "services:\n  adguard:\n    image: adguard/adguardhome:latest\n    container_name: adguard\n    ports:\n      - '53:53/tcp'\n      - '53:53/udp'\n      - '3000:3000'\n      - '8083:80'\n    volumes:\n      - ${CONFIG_PATH}/work:/opt/adguardhome/work\n      - ${CONFIG_PATH}/conf:/opt/adguardhome/conf\n    restart: unless-stopped",
+      "openMode": "internal"
     },
     "nginx-proxy": {
       "name": "Nginx Proxy Manager",
@@ -220,7 +247,8 @@
       "credentials": {
         "username": "admin@example.com",
         "password": "changeme"
-      }
+      },
+      "openMode": "internal"
     },
     "gitea": {
       "name": "Gitea",
@@ -230,7 +258,8 @@
       "port": 3000,
       "image": "gitea/gitea:latest",
       "official": true,
-      "compose": "services:\n  gitea:\n    image: gitea/gitea:latest\n    container_name: gitea\n    ports:\n      - '3000:3000'\n      - '2222:22'\n    volumes:\n      - ${CONFIG_PATH}/data:/data\n      - /etc/timezone:/etc/timezone:ro\n      - /etc/localtime:/etc/localtime:ro\n    environment:\n      - USER_UID=1000\n      - USER_GID=1000\n    restart: unless-stopped"
+      "compose": "services:\n  gitea:\n    image: gitea/gitea:latest\n    container_name: gitea\n    ports:\n      - '3000:3000'\n      - '2222:22'\n    volumes:\n      - ${CONFIG_PATH}/data:/data\n      - /etc/timezone:/etc/timezone:ro\n      - /etc/localtime:/etc/localtime:ro\n    environment:\n      - USER_UID=1000\n      - USER_GID=1000\n    restart: unless-stopped",
+      "openMode": "internal"
     },
     "codeserver": {
       "name": "VS Code Server",
@@ -247,7 +276,8 @@
       },
       "credentials": {
         "passwordKey": "PASSWORD"
-      }
+      },
+      "openMode": "internal"
     },
     "portainer": {
       "name": "Portainer",
@@ -257,7 +287,8 @@
       "port": 9000,
       "image": "portainer/portainer-ce:latest",
       "official": true,
-      "compose": "services:\n  portainer:\n    image: portainer/portainer-ce:latest\n    container_name: portainer\n    ports:\n      - '9000:9000'\n    volumes:\n      - /var/run/docker.sock:/var/run/docker.sock\n      - ${CONFIG_PATH}/data:/data\n    restart: unless-stopped"
+      "compose": "services:\n  portainer:\n    image: portainer/portainer-ce:latest\n    container_name: portainer\n    ports:\n      - '9000:9000'\n    volumes:\n      - /var/run/docker.sock:/var/run/docker.sock\n      - ${CONFIG_PATH}/data:/data\n    restart: unless-stopped",
+      "openMode": "internal"
     },
     "vaultwarden": {
       "name": "Vaultwarden",
@@ -267,7 +298,8 @@
       "port": 8082,
       "image": "vaultwarden/server:latest",
       "official": true,
-      "compose": "services:\n  vaultwarden:\n    image: vaultwarden/server:latest\n    container_name: vaultwarden\n    ports:\n      - '8082:80'\n    volumes:\n      - ${CONFIG_PATH}/data:/data\n    environment:\n      - WEBSOCKET_ENABLED=true\n    restart: unless-stopped"
+      "compose": "services:\n  vaultwarden:\n    image: vaultwarden/server:latest\n    container_name: vaultwarden\n    ports:\n      - '8082:80'\n    volumes:\n      - ${CONFIG_PATH}/data:/data\n    environment:\n      - WEBSOCKET_ENABLED=true\n    restart: unless-stopped",
+      "openMode": "internal"
     },
     "authelia": {
       "name": "Authelia",
@@ -277,7 +309,8 @@
       "port": 9092,
       "image": "authelia/authelia:latest",
       "official": true,
-      "compose": "services:\n  authelia:\n    image: authelia/authelia:latest\n    container_name: authelia\n    ports:\n      - '9092:9091'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n    environment:\n      - TZ=${TZ}\n    restart: unless-stopped"
+      "compose": "services:\n  authelia:\n    image: authelia/authelia:latest\n    container_name: authelia\n    ports:\n      - '9092:9091'\n    volumes:\n      - ${CONFIG_PATH}/config:/config\n    environment:\n      - TZ=${TZ}\n    restart: unless-stopped",
+      "openMode": "internal"
     },
     "grafana": {
       "name": "Grafana",
@@ -294,7 +327,8 @@
       "credentials": {
         "username": "admin",
         "passwordKey": "ADMIN_PASSWORD"
-      }
+      },
+      "openMode": "internal"
     },
     "prometheus": {
       "name": "Prometheus",
@@ -304,7 +338,8 @@
       "port": 9090,
       "image": "prom/prometheus:latest",
       "official": true,
-      "compose": "services:\n  prometheus:\n    image: prom/prometheus:latest\n    container_name: prometheus\n    ports:\n      - '9090:9090'\n    volumes:\n      - ${CONFIG_PATH}/config:/etc/prometheus\n      - ${CONFIG_PATH}/data:/prometheus\n    restart: unless-stopped"
+      "compose": "services:\n  prometheus:\n    image: prom/prometheus:latest\n    container_name: prometheus\n    ports:\n      - '9090:9090'\n    volumes:\n      - ${CONFIG_PATH}/config:/etc/prometheus\n      - ${CONFIG_PATH}/data:/prometheus\n    restart: unless-stopped",
+      "openMode": "internal"
     },
     "uptime-kuma": {
       "name": "Uptime Kuma",
@@ -314,7 +349,8 @@
       "port": 3002,
       "image": "louislam/uptime-kuma:latest",
       "official": true,
-      "compose": "services:\n  uptime-kuma:\n    image: louislam/uptime-kuma:latest\n    container_name: uptime-kuma\n    ports:\n      - '3002:3001'\n    volumes:\n      - ${CONFIG_PATH}/data:/app/data\n    restart: unless-stopped"
+      "compose": "services:\n  uptime-kuma:\n    image: louislam/uptime-kuma:latest\n    container_name: uptime-kuma\n    ports:\n      - '3002:3001'\n    volumes:\n      - ${CONFIG_PATH}/data:/app/data\n    restart: unless-stopped",
+      "openMode": "internal"
     }
   }
 }
